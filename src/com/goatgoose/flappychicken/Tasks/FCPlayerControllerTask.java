@@ -14,8 +14,6 @@ public class FCPlayerControllerTask extends BukkitRunnable {
 
     private FCPlayer fcPlayer;
 
-    private boolean isJump = false;
-
     public FCPlayerControllerTask(FlappyChicken instance, FCPlayer fcPlayer) {
         plugin = instance;
         this.fcPlayer = fcPlayer;
@@ -24,9 +22,9 @@ public class FCPlayerControllerTask extends BukkitRunnable {
     @Override
     public void run() {
         Chicken chicken = fcPlayer.getChicken();
-        if(isJump) {
-            chicken.setVelocity(new Vector(0, -0.05, 0.2));
-            isJump = false;
+        if(fcPlayer.getIsJump()) {
+            chicken.setVelocity(new Vector(0, 2, 0.05));
+            fcPlayer.unJumpChicken();
         } else {
             chicken.setVelocity(new Vector(0, -0.05, 0.05));
         }
@@ -35,9 +33,4 @@ public class FCPlayerControllerTask extends BukkitRunnable {
         Location playerOffset = chickenLocation.add(-10, 0, 5).setDirection(new Vector(1, 0, 0));
         fcPlayer.getPlayer().teleport(playerOffset);
     }
-
-    public void setIsJump(boolean isJump) {
-        this.isJump = isJump;
-    }
-
 }

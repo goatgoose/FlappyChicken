@@ -21,6 +21,8 @@ public class FCPlayer {
 
     private Chicken chicken;
 
+    private boolean isJump = false;
+
     public FCPlayer(FlappyChicken instance, Player player) {
         plugin = instance;
         this.player = player;
@@ -43,8 +45,16 @@ public class FCPlayer {
         return chicken;
     }
 
+    public boolean getIsJump() {
+        return isJump;
+    }
+
     public void jumpChicken() {
-        controller.setIsJump(true);
+        isJump = true;
+    }
+
+    public void unJumpChicken() {
+        isJump = false;
     }
 
     // -1, 85, -13
