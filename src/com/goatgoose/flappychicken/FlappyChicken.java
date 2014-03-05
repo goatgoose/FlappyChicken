@@ -1,5 +1,7 @@
 package com.goatgoose.flappychicken;
 
+import com.goatgoose.flappychicken.Listeners.PlayerListener;
+import com.goatgoose.flappychicken.Model.FCPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -10,11 +12,18 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FlappyChicken extends JavaPlugin {
 
-    @Override
-    public void onEnable() {
+    private PlayerListener playerListener;
 
+    private List<FCPlayer> flappyChickenPlayers = new ArrayList<FCPlayer>();
+
+        @Override
+    public void onEnable() {
+        playerListener = new PlayerListener(this);
     }
 
     @Override
@@ -38,6 +47,31 @@ public class FlappyChicken extends JavaPlugin {
             return true;
         }
         return false;
+    }
+
+    public List<FCPlayer> getFlappyChickenPlayers() {
+        return flappyChickenPlayers;
+    }
+
+    public void addFlappyChickenPlayer(Player player) {
+        flappyChickenPlayers.add(new FCPlayer(this, player));
+    }
+
+    public void removeFlappyChickenPlayer(Player player) {
+        for(FCPlayer fcPlayer : flappyChickenPlayers) {
+            if(player == fcPlayer.getPlayer()) {
+                flappyChickenPlayers.remove(fcPlayer);
+            }
+        }
+    }
+
+    public FCPlayer getFCPlayer(Player player) {
+        for(FCPlayer fcPlayer : flappyChickenPlayers) {
+            if(player == fcPlayer.getPlayer()) {
+                return fcPlayer;
+            }
+        }
+        return null;
     }
 
 }
