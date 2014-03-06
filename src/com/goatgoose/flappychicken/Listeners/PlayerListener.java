@@ -24,6 +24,7 @@ public class PlayerListener implements Listener{
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         plugin.addFlappyChickenPlayer(event.getPlayer());
+        plugin.getFCPlayer(event.getPlayer()).jumpChicken();
     }
 
     @EventHandler
@@ -33,7 +34,7 @@ public class PlayerListener implements Listener{
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if(event.getAction() == Action.LEFT_CLICK_AIR) {
+        if(event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_AIR) {
             event.setCancelled(true);
             FCPlayer fcPlayer = plugin.getFCPlayer(event.getPlayer());
             fcPlayer.jumpChicken();

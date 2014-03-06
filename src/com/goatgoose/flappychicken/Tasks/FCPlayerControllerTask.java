@@ -14,11 +14,11 @@ public class FCPlayerControllerTask extends BukkitRunnable {
 
     private FCPlayer fcPlayer;
 
-    private double jumpVelocity = 0.5;
+    private double jumpVelocity = 1.4;
 
-    private double horizontalVelocity = 0.09;
+    private double horizontalVelocity = 0.35;
 
-    private double gravitationalConstant = -0.05;
+    private double gravitationalConstant = -0.126;
 
     private Vector vertialVelocity = new Vector();
 
@@ -29,6 +29,7 @@ public class FCPlayerControllerTask extends BukkitRunnable {
 
     @Override
     public void run() {
+        // physics developed with the help of http://gamedev.stackexchange.com/questions/70268/can-someone-explain-flappy-birds-physics-to-me
         Chicken chicken = fcPlayer.getChicken();
         if(fcPlayer.getIsJump()) {
             vertialVelocity = vertialVelocity.setY(jumpVelocity);
@@ -38,8 +39,8 @@ public class FCPlayerControllerTask extends BukkitRunnable {
         vertialVelocity = vertialVelocity.add(new Vector(0, gravitationalConstant, 0));
 
         Location chickenLocation = chicken.getLocation();
-        Location playerOffset = chickenLocation.add(-10, 0, 5).setDirection(new Vector(1, 0, 0));
-        playerOffset.setY(85);
+        Location playerOffset = chickenLocation.add(-20, 0, 5).setDirection(new Vector(1, 0, 0));
+        playerOffset.setY(125);
         fcPlayer.getPlayer().teleport(playerOffset);
     }
 }

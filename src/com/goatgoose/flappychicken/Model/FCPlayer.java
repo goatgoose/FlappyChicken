@@ -26,7 +26,7 @@ public class FCPlayer {
     public FCPlayer(FlappyChicken instance, Player player) {
         plugin = instance;
         this.player = player;
-        this.chicken = (Chicken) player.getWorld().spawnEntity(new Location(player.getWorld(), -1, 85, -13), EntityType.CHICKEN);
+        this.chicken = (Chicken) player.getWorld().spawnEntity(new Location(player.getWorld(), 6, 126, 49), EntityType.CHICKEN);
         controller = new FCPlayerControllerTask(plugin, this);
 
         for(FCPlayer fcPlayer : plugin.getFlappyChickenPlayers()) {
