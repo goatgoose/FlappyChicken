@@ -61,6 +61,7 @@ public class FlappyChicken extends JavaPlugin {
         for(FCPlayer fcPlayer : flappyChickenPlayers) {
             if(player == fcPlayer.getPlayer()) {
                 flappyChickenPlayers.remove(fcPlayer);
+                return;
             }
         }
     }

@@ -3,8 +3,11 @@ package com.goatgoose.flappychicken.Listeners;
 import com.goatgoose.flappychicken.FlappyChicken;
 import com.goatgoose.flappychicken.Model.FCPlayer;
 import org.bukkit.Bukkit;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -29,12 +32,11 @@ public class PlayerListener implements Listener{
     }
 
     @EventHandler
-    public void onMove(PlayerMoveEvent event) {
-        if(event.getFrom().getY() < event.getTo().getY()) { // player jumped
+    public void onPlayerInteract(PlayerInteractEvent event) {
+        if(event.getAction() == Action.LEFT_CLICK_AIR) {
             event.setCancelled(true);
             FCPlayer fcPlayer = plugin.getFCPlayer(event.getPlayer());
             fcPlayer.jumpChicken();
         }
     }
-
 }

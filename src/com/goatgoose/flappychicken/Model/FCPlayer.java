@@ -56,7 +56,4 @@ public class FCPlayer {
     public void unJumpChicken() {
         isJump = false;
     }
-
-    // -1, 85, -13
-
 }
